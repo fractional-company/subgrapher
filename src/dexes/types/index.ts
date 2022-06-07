@@ -1,48 +1,50 @@
+import BigNumber from 'bignumber.js';
+
 export type PoolAnalytics = {
-  address: string,
-  token0: TokenData,
-  token1: TokenData,
-  token0Price: number,
-  token1Price: number,
-  volumeUSD: number,
-  txCount: number,
-  totalValueLockedToken0: number,
-  totalValueLockedToken1: number,
-  weight: number,
+  address: string
+  token0: TokenData
+  token1: TokenData
+  token0Price: BigNumber
+  token1Price: BigNumber
+  volumeUSD: BigNumber
+  txCount: BigNumber
+  totalValueLockedToken0: BigNumber
+  totalValueLockedToken1: BigNumber
+  weight: BigNumber
 }
 
 export type TokenData = {
-  address: string,
-  derivedETH: number,
-  name: string,
-  symbol: string,
-  totalSupply: number,
-  totalValueLocked: number,
-  txCount: number,
-  untrackedVolumeUSD: number,
-  volume: number,
-  volumeUSD: number,
+  address: string
+  derivedETH: BigNumber
+  name: string
+  symbol: string
+  totalValueLocked: BigNumber
+  txCount: BigNumber
+  untrackedVolumeUSD: BigNumber
+  volume: BigNumber
+  volumeUSD: BigNumber
 }
 
 export type PoolData = {
-  address: string,
-  token0: TokenData,
-  token1: TokenData,
-  token0Price: number,
-  token1Price: number,
-  volumeUSD: number,
-  feesUSD: number,
-  txCount: number,
-  totalValueLockedToken0: number,
-  totalValueLockedToken1: number,
+  weight?: number;
+  address: string
+  token0: TokenData
+  token1: TokenData
+  token0Price: BigNumber
+  token1Price: BigNumber
+  volumeUSD: BigNumber
+  txCount: BigNumber
+  totalValueLockedUSD: BigNumber
+  totalValueLockedToken0: BigNumber
+  totalValueLockedToken1: BigNumber
 }
 
 export type PoolDayData = {
-  date: string,
-  address: string,
-  volumeUSD: number,
-  tvlUSD: number,
-  txCount: number,
+  date: number
+  address: string
+  volumeUSD: BigNumber
+  tvlUSD: BigNumber
+  txCount: BigNumber
 }
 
 export type BulkPoolsAnalytics = {
@@ -50,5 +52,5 @@ export type BulkPoolsAnalytics = {
 }
 
 export type BulkAnalyticsRequest = {
-  [address: string]: [string]
+  [address: string]: string[]
 }

@@ -41,4 +41,7 @@ describe('Blocks integration tests', () => {
       'timestamp',
     ]);
   });
+  it('should chain be supported', async () => {
+    expect(Blocks.isChainSupported(CHAINS.MAINNET)).toEqual(true);
+  });
 });

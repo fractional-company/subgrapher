@@ -1,10 +1,12 @@
 import type {BulkPoolsAnalytics, PoolAnalytics} from '../dexes/types';
 
-export default function mergePools(bulk: boolean = true, ...args: PoolAnalytics[] | BulkPoolsAnalytics[]): Object | [] {
+export function mergePools(bulk: boolean = true, ...args: PoolAnalytics[] | BulkPoolsAnalytics[]): Object | [] {
   if (!bulk) {
-    return args.flatMap((pools: []) => pools)
+    // @ts-ignore
+    return args.flatMap((pools: any[]) => pools)
   }
 
+  // @ts-ignore
   return args.reduce((carry, bulkTokenPoolsAnalytics: BulkPoolsAnalytics) => {
     let tokenAddresses = Object.keys(bulkTokenPoolsAnalytics)
     tokenAddresses.forEach(tokenAddress => {

@@ -14,7 +14,8 @@ export function formatTokenSymbol(address: string, symbol: string): string {
   if (address === WETH_ADDRESS) {
     return 'ETH'
   }
-  return symbol
+
+  return symbol?.toUpperCase()
 }
 
 /**
@@ -27,5 +28,6 @@ export function formatTokenName(address: string, name: string): string {
   if (address === WETH_ADDRESS) {
     return 'Ether'
   }
+
   return name
 }

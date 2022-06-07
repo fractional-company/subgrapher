@@ -11,10 +11,7 @@ import {
 
 export class Blocks extends BaseService {
   constructor(chainId: number | undefined = CHAINS.MAINNET) {
-    if (!ENDPOINTS[chainId]) {
-      throw new Error(`BlocksClient: chain id ${chainId} is not supported`);
-    }
-    super(ENDPOINTS[chainId], chainId);
+    super(ENDPOINTS, chainId);
   }
 
   getNearestBlockByTimestamp(timestamp: number | string) {
@@ -35,5 +32,9 @@ export class Blocks extends BaseService {
 
   getBlocksByNumbers(numbers: (string | number)[]) {
     return fetchBlocksByNumbers(this.client, numbers);
+  }
+
+  static isChainSupported(chainId: number): boolean {
+    return !!ENDPOINTS[chainId];
   }
 }

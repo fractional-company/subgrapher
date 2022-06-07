@@ -9,8 +9,12 @@ export default class BaseService implements GraphQlService {
   chainId: number;
   client: GraphQLClient;
 
-  constructor(endpoint: string, chainId: number) {
+  constructor(chainEndpoints: any, chainId: number) {
     this.chainId = chainId;
-    this.client = new GraphQLClient(endpoint);
+    if (!chainEndpoints[chainId]) {
+      throw new Error(`Chain id ${chainId} is not supported`);
+    }
+    console.log(chainEndpoints[chainId])
+    this.client = new GraphQLClient(chainEndpoints[chainId]);
   }
 }
