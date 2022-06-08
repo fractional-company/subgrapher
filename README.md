@@ -55,7 +55,7 @@ await service.getBlocksByNumbers([14901000]);
 
 Type: `array`
 
-array of block numbers
+Array of block numbers
 
 ### Get block based on current date sub one, two or seven day/s
 
@@ -97,7 +97,7 @@ service.getEthPrice(blockNumber, method, sources)
 //=> BigNumber
 
 // Array of  ETH prices (across dexes) 
-service.getEthPrices(blockNumber, method, sources)
+service.getEthPrices(blockNumber, sources)
 //=> [BigNumber,BigNumber,BigNumber]
 ```
 #### getEthPrice(blockNumber?, method?, sources?)
@@ -106,7 +106,7 @@ service.getEthPrices(blockNumber, method, sources)
 
 Type: `number`
 
-block number
+The block number
 
 #### method
 
@@ -120,6 +120,23 @@ Type: `array`
 
 Default: [SUSHISWAP_V1, UNISWAP_V2, UNISWAP_V3]
 
+Array of sources to fetch prices from
+
+#### getEthPrices(blockNumber?, sources?)
+
+#### blockNumber
+
+Type: `number`
+
+The block number
+
+##### sources
+
+Type: `array`
+
+Default: [SUSHISWAP_V1, UNISWAP_V2, UNISWAP_V3]
+
+Array of sources to fetch prices from
 
 ### Get current or historical ERC20 token price
 
@@ -130,20 +147,26 @@ const service = new DEXES(CHAINS.MAINNET);
 
 // ETH price
 const blockNumber = 14901000;
-service.getTokenPrice(blockNumber, method, sources)
+service.getTokenPrice(contractAddress, blockNumber, method, sources)
 //=> BigNumber
 
 // Array of  prices (across dexes) 
-service.getTokenPrices(blockNumber, method, sources)
+service.getTokenPrices(contractAddress, blockNumber, method, sources)
 //=> [BigNumber,BigNumber,BigNumber]
 ```
-#### getEthPrice(blockNumber?, method?, sources?)
+#### getTokenPrices(contractAddress, blockNumber?, method?, sources?)
+
+#### contractAddress
+
+Type: `string` 
+
+ERC 20 token contract Address
 
 #### blockNumber
 
 Type: `number`
 
-block number
+The block number
 
 #### method
 
@@ -156,6 +179,24 @@ Default: max
 Type: `array`
 
 Default: [SUSHISWAP_V1, UNISWAP_V2, UNISWAP_V3]
+
+Array of sources to fetch prices from
+
+#### getTokenPrices(blockNumber?, sources?)
+
+#### blockNumber
+
+Type: `number`
+
+The block number
+
+##### sources
+
+Type: `array`
+
+Default: [SUSHISWAP_V1, UNISWAP_V2, UNISWAP_V3]
+
+Array of sources to fetch prices from
 
 ### Get ERC20 token pools
 
