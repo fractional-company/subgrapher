@@ -24,27 +24,43 @@ npm install @fractional-company/subgrapher
 ### Get the nearest block based on a timestamp
 
 ```ts
-import { Blocks } from '@fractional-company/subgrapher';
+import { Blocks, CHAINS } from '@fractional-company/subgrapher';
 
 const service = new Blocks(CHAINS.MAINNET);
 await service.getNearestBlockByTimestamp(1654313448);
 //=> {id: '0xd357c32704daa1147461c786a9fd6ee29d2119b2f416aefe253b231b20b99a3a', number: 14901000, timestamp: 1654313446}
 ```
+#### getNearestBlockByTimestamp(timestamp)
+
+#### timestamp
+
+Type: `number`
+
+timestamp
+
 
 ### Get blocks based on block numbers
 
 ```ts
-import { Blocks } from '@fractional-company/subgrapher';
+import { Blocks, CHAINS } from '@fractional-company/subgrapher';
 
 const service = new Blocks(CHAINS.MAINNET);
 await service.getBlocksByNumbers([14901000]);
 //=> [{id: '0xd357c32704daa1147461c786a9fd6ee29d2119b2f416aefe253b231b20b99a3a', number: 14901000, timestamp: 1654313446}]
 ```
 
+#### getNearestBlockByTimestamp(blockNumbers)
+
+#### blockNumbers
+
+Type: `array`
+
+array of block numbers
+
 ### Get block based on current date sub one, two or seven day/s
 
 ```ts
-import { Blocks } from '@fractional-company/subgrapher';
+import { Blocks, CHAINS } from '@fractional-company/subgrapher';
 
 const service = new Blocks(CHAINS.MAINNET);
 
@@ -71,7 +87,7 @@ Supported:
 ### Get current or historical ETH price
 
 ```ts
-import { DEXES } from '@fractional-company/subgrapher';
+import { DEXES, CHAINS } from '@fractional-company/subgrapher';
 
 const service = new DEXES(CHAINS.MAINNET);
 
@@ -108,7 +124,7 @@ Default: [SUSHISWAP_V1, UNISWAP_V2, UNISWAP_V3]
 ### Get current or historical ERC20 token price
 
 ```ts
-import { DEXES } from '@fractional-company/subgrapher';
+import { DEXES, CHAINS } from '@fractional-company/subgrapher';
 
 const service = new DEXES(CHAINS.MAINNET);
 
@@ -144,7 +160,7 @@ Default: [SUSHISWAP_V1, UNISWAP_V2, UNISWAP_V3]
 ### Get ERC20 token pools
 
 ```ts
-import { DEXES } from '@fractional-company/subgrapher';
+import { DEXES, CHAINS } from '@fractional-company/subgrapher';
 
 const service = new DEXES(CHAINS.MAINNET);
 
