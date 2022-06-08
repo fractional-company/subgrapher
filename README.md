@@ -63,7 +63,12 @@ await service.fetchSevenDayBlock();
 
 ## Dexes
 
-### Get current/past ETH price
+Supported:
+- SUSHISWAP 
+- UNISWAP V2 
+- UNISWAP V3
+
+### Get current or historical ETH price
 
 ```ts
 import { DEXES } from '@fractional-company/subgrapher';
@@ -91,7 +96,7 @@ block number
 
 Type: `string`
 
-Default: METHOD_MAX
+Default: max
 
 ##### sources
 
@@ -99,7 +104,61 @@ Type: `array`
 
 Default: [SUSHISWAP_V1, UNISWAP_V2, UNISWAP_V3]
 
-### WIP
+
+### Get current or historical ERC20 token price
+
+```ts
+import { DEXES } from '@fractional-company/subgrapher';
+
+const service = new DEXES(CHAINS.MAINNET);
+
+// ETH price
+const blockNumber = 14901000;
+service.getTokenPrice(blockNumber, method, sources)
+//=> BigNumber
+
+// Array of  prices (across dexes) 
+service.getTokenPrices(blockNumber, method, sources)
+//=> [BigNumber,BigNumber,BigNumber]
+```
+#### getEthPrice(blockNumber?, method?, sources?)
+
+#### blockNumber
+
+Type: `number`
+
+block number
+
+#### method
+
+Type: `string`
+
+Default: max
+
+##### sources
+
+Type: `array`
+
+Default: [SUSHISWAP_V1, UNISWAP_V2, UNISWAP_V3]
+
+### Get ERC20 token pools
+
+```ts
+import { DEXES } from '@fractional-company/subgrapher';
+
+const service = new DEXES(CHAINS.MAINNET);
+
+service.getTokenPools(contractAddress)
+//=> [{ weight?: number,  source: string,  address: string,  token0: TokenData,  token1: TokenData,  token0Price: BigNumber,  token1Price: BigNumber,  volumeUSD: BigNumber,  txCount: BigNumber,  totalValueLockedUSD: BigNumber,  totalValueLockedToken0: BigNumber,  totalValueLockedToken1: BigNumber}]
+
+```
+#### getTokenPools(contractAddress)
+
+#### contractAddress
+
+Type: `string`
+
+ERC 20 contract address
 
 [build-img]:https://github.com/fractional-company/subgrapher/actions/workflows/release.yml/badge.svg
 
