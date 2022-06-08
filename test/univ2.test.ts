@@ -2,6 +2,7 @@ import { CHAINS } from '../src/constants/chains';
 import { UniswapV2 } from '../src/dexes/uniswap/v2';
 import BigNumber from './../src/utils/BigNumber';
 import { PoolDayData } from '../src/dexes/types';
+import { UNISWAP_V2 } from '../src';
 
 const service = new UniswapV2(CHAINS.MAINNET);
 const FOX_ADDRESS = '0xf5d990c5e284d2b4dee8473048ec869032f5a3b2';
@@ -27,6 +28,7 @@ describe('UniswapV2 integration tests', () => {
 
     it('should return historic data for token FOX', async () => {
       const mock = {
+        source: UNISWAP_V2,
         address: '0xf5d990c5e284d2b4dee8473048ec869032f5a3b2',
         symbol: 'FOX',
         name: 'Fox vault',
@@ -61,6 +63,7 @@ describe('UniswapV2 integration tests', () => {
       const pool = pools[0];
       expect(pool.address).toEqual('0x6f780226518a05c7d523e27fda2923ed80a6bae6');
       expect((Object.keys(pool)).sort()).toEqual([
+        'source',
         'address',
         'token0',
         'token0Price',
@@ -79,7 +82,9 @@ describe('UniswapV2 integration tests', () => {
     it('should return pool data for Fox vault', async () => {
       const poolsData = await service.getPoolsData(['0x6f780226518a05c7d523e27fda2923ed80a6bae6']);
       expect(poolsData.length).toEqual(1);
-      expect((Object.keys(poolsData[0])).sort()).toEqual(['address',
+      expect((Object.keys(poolsData[0])).sort()).toEqual([
+        'source',
+        'address',
         'token0',
         'token1',
         'txCount',
@@ -117,6 +122,7 @@ describe('UniswapV2 integration tests', () => {
       let poolData3 = poolsData.find((i: PoolDayData) => i.date === 1640736000);
       //
       expect(poolData1).toEqual({
+        source: UNISWAP_V2,
         address: '0x2aeb4cb9a9bff48cdeef591af1d63d8ee0b8bb6d',
         date: 1640995200,
         tvlUSD: new BigNumber('8315.255659539250027411'),
@@ -124,6 +130,7 @@ describe('UniswapV2 integration tests', () => {
         volumeUSD: new BigNumber('0'),
       });
       expect(poolData2).toEqual({
+        source: UNISWAP_V2,
         address: '0x2aeb4cb9a9bff48cdeef591af1d63d8ee0b8bb6d',
         date: 1640822400,
         tvlUSD: new BigNumber('3315.286302296463539332'),
@@ -131,6 +138,7 @@ describe('UniswapV2 integration tests', () => {
         volumeUSD: new BigNumber('0'),
       });
       expect(poolData3).toEqual({
+        source: UNISWAP_V2,
         address: '0x2aeb4cb9a9bff48cdeef591af1d63d8ee0b8bb6d',
         date: 1640736000,
         tvlUSD: new BigNumber('82324.488987331541934782'),

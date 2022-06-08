@@ -8,7 +8,7 @@ import {
 } from './queries';
 import { mapToken, TokenFields } from './tokenData';
 import { PoolData, PoolDayData } from '../../types';
-import { TOKEN_0 } from '../../constants';
+import { TOKEN_0, UNISWAP_V3 } from '../../constants';
 import BigNumber from '../../../utils/BigNumber';
 
 type PoolFields = {
@@ -56,6 +56,7 @@ export const fetchTokenPools = async (client: GraphQLClient,
 
 const mapPool = function(pool: PoolFields): PoolData {
   return {
+    source: UNISWAP_V3,
     address: pool.id,
     token0: {
       ...mapToken(pool.token0),
@@ -75,6 +76,7 @@ const mapPool = function(pool: PoolFields): PoolData {
 
 const mapPoolDayData = function(poolDayData: PoolDayFields): PoolDayData {
   return {
+    source: UNISWAP_V3,
     address: poolDayData?.pool?.id,
     date: parseInt(poolDayData.date),
     tvlUSD: new BigNumber(poolDayData.tvlUSD?.toString()),

@@ -2,6 +2,7 @@ import { CHAINS } from '../src/constants/chains';
 import BigNumber from './../src/utils/BigNumber';
 import { PoolDayData } from '../src/dexes/types';
 import { SushiswapV1 } from '../src/dexes/sushiswap/v1';
+import { SUSHISWAP_V1 } from '../src';
 
 const service = new SushiswapV1(CHAINS.MAINNET);
 const GAINZY_ADDRESS = '0x698ad151125deb394e62154245d6129e9068c483';
@@ -27,6 +28,7 @@ describe('SushiswapV1 integration tests', () => {
 
     it('should return historic data for token DOG', async () => {
       const mock = {
+        source: SUSHISWAP_V1,
         address: '0xbaac2b4491727d78d2b78815144570b9f2fe8899',
         symbol: 'DOG',
         name: 'The Doge NFT',
@@ -63,6 +65,7 @@ describe('SushiswapV1 integration tests', () => {
       expect(pool.address).toEqual('0xc96f20099d96b37d7ede66ff9e4de59b9b1065b1');
       expect((Object.keys(pool)).sort()).toEqual([
         'address',
+        'source',
         'token0',
         'token0Price',
         'token1',
@@ -80,7 +83,9 @@ describe('SushiswapV1 integration tests', () => {
     it('should return pool data for DOG vault', async () => {
       const poolsData = await service.getPoolsData(['0xc96f20099d96b37d7ede66ff9e4de59b9b1065b1']);
       expect(poolsData.length).toEqual(1);
-      expect((Object.keys(poolsData[0])).sort()).toEqual(['address',
+      expect((Object.keys(poolsData[0])).sort()).toEqual([
+        'source',
+        'address',
         'token0',
         'token1',
         'txCount',
@@ -118,6 +123,7 @@ describe('SushiswapV1 integration tests', () => {
       let poolData3 = poolsData.find((i: PoolDayData) => i.date === 1632182400);
       //
       expect(poolData1).toEqual({
+        source: SUSHISWAP_V1,
         address: '0xc96f20099d96b37d7ede66ff9e4de59b9b1065b1',
         date: 1632355200,
         tvlUSD: new BigNumber('17879428.61150545300798661193304203'),
@@ -125,6 +131,7 @@ describe('SushiswapV1 integration tests', () => {
         volumeUSD: new BigNumber('1453978.320649491561728244211797638'),
       });
       expect(poolData2).toEqual({
+        source: SUSHISWAP_V1,
         address: '0xc96f20099d96b37d7ede66ff9e4de59b9b1065b1',
         date: 1632268800,
         tvlUSD: new BigNumber('17292318.51639216207693395661968781'),
@@ -132,6 +139,7 @@ describe('SushiswapV1 integration tests', () => {
         volumeUSD: new BigNumber('300777.4775557679968393061668179756'),
       });
       expect(poolData3).toEqual({
+        source: SUSHISWAP_V1,
         address: '0xc96f20099d96b37d7ede66ff9e4de59b9b1065b1',
         date: 1632182400,
         tvlUSD: new BigNumber('15739215.31729059548917862917503196'),

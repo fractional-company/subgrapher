@@ -1,7 +1,7 @@
 import { GraphQLClient } from 'graphql-request';
 import { mapToken, TokenFields } from './tokenData';
 import { PoolData, PoolDayData } from '../../types';
-import { TOKEN_0 } from '../../constants';
+import { SUSHISWAP_V1, TOKEN_0 } from '../../constants';
 import {
   pairDayDatasQuery, pairsPastQuery, pairsQuery, poolsByToken0Query, poolsByToken1Query,
 } from './queries';
@@ -35,6 +35,7 @@ type PoolDayFields = {
 
 const mapPool = function(pool: PoolFields): PoolData {
   return {
+    source: SUSHISWAP_V1,
     address: pool.id,
     token0: {
       ...mapToken(pool.token0),
@@ -54,6 +55,7 @@ const mapPool = function(pool: PoolFields): PoolData {
 
 const mapPoolDayData = function(poolDayData: PoolDayFields): PoolDayData {
   return {
+    source: SUSHISWAP_V1,
     address: poolDayData?.pair?.id,
     date: parseInt(poolDayData.date),
     tvlUSD: new BigNumber(poolDayData.reserveUSD?.toString()),

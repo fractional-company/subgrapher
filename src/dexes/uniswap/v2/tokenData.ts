@@ -3,6 +3,7 @@ import { tokenQuery, tokenTimeTravelQuery } from './queries';
 import { TokenData } from '../../types';
 import { GraphQLClient } from 'graphql-request';
 import BigNumber from './../../../utils/BigNumber';
+import { UNISWAP_V2 } from '../../constants';
 
 export type TokenFields = {
   id: string,
@@ -20,6 +21,7 @@ export type TokenFields = {
 export const mapToken = function(token: TokenFields): TokenData {
 
   return {
+    source: UNISWAP_V2,
     address: token.id,
     derivedETH: new BigNumber(token.derivedETH?.toString()),
     name: formatTokenName(token.id, token.name),  // 'Art Blocks Curated Full Set',

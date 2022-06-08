@@ -1,7 +1,7 @@
 {
-  "name": "@fractional-company/amm",
+  "name": "@fractional-company/subgrapher",
   "version": "0.0.0-development",
-  "description": "A subgraph dex utility",
+  "description": "Simple utility for querying popular Subgraphs",
   "main": "./lib/src/index.js",
   "files": [
     "lib/**/*"
@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ryansonshine/typescript-npm-package-template.git"
+    "url": "git+https://github.com/fractional-company/dexsubgrapher.git"
   },
   "license": "MIT",
   "author": {
@@ -43,9 +43,9 @@
     "codecov"
   ],
   "bugs": {
-    "url": "https://github.com/ryansonshine/typescript-npm-package-template/issues"
+    "url": "https://github.com/fractional-company/dexsubgrapher.git/issues"
   },
-  "homepage": "https://github.com/ryansonshine/typescript-npm-package-template#readme",
+  "homepage": "https://github.com/fractional-company/dexsubgrapher.git#readme",
   "devDependencies": {
     "@ryansonshine/commitizen": "^4.2.8",
     "@ryansonshine/cz-conventional-changelog": "^3.3.4",

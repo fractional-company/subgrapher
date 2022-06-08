@@ -14,6 +14,7 @@ export type PoolAnalytics = {
 }
 
 export type TokenData = {
+  source: string,
   address: string
   derivedETH: BigNumber
   name: string
@@ -27,6 +28,7 @@ export type TokenData = {
 
 export type PoolData = {
   weight?: number;
+  source: string,
   address: string
   token0: TokenData
   token1: TokenData
@@ -40,6 +42,7 @@ export type PoolData = {
 }
 
 export type PoolDayData = {
+  source?: string,
   date: number
   address: string
   volumeUSD: BigNumber

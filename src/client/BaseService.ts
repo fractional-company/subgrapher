@@ -14,7 +14,6 @@ export default class BaseService implements GraphQlService {
     if (!chainEndpoints[chainId]) {
       throw new Error(`Chain id ${chainId} is not supported`);
     }
-    console.log(chainEndpoints[chainId])
     this.client = new GraphQLClient(chainEndpoints[chainId]);
   }
 }
