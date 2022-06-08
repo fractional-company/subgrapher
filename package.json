@@ -1,7 +1,7 @@
 {
   "name": "@fractional-company/subgrapher",
   "version": "0.0.1-development",
-  "description": "Simple utility for querying popular Subgraphs",
+  "description": "Simple utility for querying popular Subgraphs.",
   "main": "./lib/src/index.js",
   "files": [
     "lib/**/*"

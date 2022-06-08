@@ -105,13 +105,13 @@ Default: [SUSHISWAP_V1, UNISWAP_V2, UNISWAP_V3]
 
 [build-url]:https://github.com/fractional-company/subgrapher/actions/workflows/release.yml
 
-[downloads-img]:https://img.shields.io/npm/dt/typescript-npm-package-template
+[downloads-img]:https://img.shields.io/npm/dt/@fractional-company/subgrapher
 
-[downloads-url]:https://www.npmtrends.com/typescript-npm-package-template
+[downloads-url]:https://www.npmtrends.com/@fractional-company/subgrapher
 
-[npm-img]:https://img.shields.io/npm/v/typescript-npm-package-template
+[npm-img]:https://img.shields.io/npm/v/@fractional-company/subgrapher
 
-[npm-url]:https://www.npmjs.com/package/typescript-npm-package-template
+[npm-url]:https://www.npmjs.com/package/@fractional-company/subgrapher
 
 [issues-img]:https://img.shields.io/github/issues/fractional-company/subgrapher
 
