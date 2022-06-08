@@ -40,7 +40,7 @@ await service.getBlocksByNumbers([14901000]);
 //=> [{id: '0xd357c32704daa1147461c786a9fd6ee29d2119b2f416aefe253b231b20b99a3a', number: 14901000, timestamp: 1654313446}]
 ```
 
-### Get block based of sub day/s
+### Get block based on current date sub one, two or seven day/s
 
 ```ts
 import { Blocks } from '@fractional-company/subgrapher';
