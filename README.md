@@ -8,6 +8,7 @@
 [![Semantic Release][semantic-release-img]][semantic-release-url]
 
 > Simple utility for querying popular Subgraphs.
+> 
 > Supported Subgraphs: Blocks, Uniswap V2, Uniswap V3 and Sushiswap.
 
 ## Install
