@@ -32,15 +32,12 @@
     "node": ">=14.0"
   },
   "keywords": [
-    "boilerplate",
-    "template",
-    "typescript",
-    "vscode",
-    "jest",
-    "husky",
-    "commitizen",
-    "semantic-release",
-    "codecov"
+    "dex",
+    "lp",
+    "subgraph",
+    "uniswap",
+    "sushiswap",
+    "blocks"
   ],
   "bugs": {
     "url": "https://github.com/fractional-company/subgrapher.git/issues"
@@ -70,6 +67,11 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/@ryansonshine/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint"
     }
   },
   "lint-staged": {
