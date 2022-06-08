@@ -34,10 +34,7 @@ await service.getNearestBlockByTimestamp(1654313448);
 
 #### timestamp
 
-Type: `number`
-
-timestamp
-
+Type: `number` - *(timestamp)*
 
 ### Get blocks based on block numbers
 
@@ -53,9 +50,7 @@ await service.getBlocksByNumbers([14901000]);
 
 #### blockNumbers
 
-Type: `array`
-
-Array of block numbers
+Type: `array` - *(array of block numbers)*
 
 ### Get block based on current date sub one, two or seven day/s
 
@@ -101,42 +96,22 @@ service.getEthPrices(blockNumber, sources)
 //=> [BigNumber,BigNumber,BigNumber]
 ```
 #### getEthPrice(blockNumber?, method?, sources?)
-
+#### getEthPrices(blockNumber?, sources?)
 #### blockNumber
 
-Type: `number`
-
-The block number
+Type: `number` - *(block number)*
 
 #### method
 
 Type: `string`
 
-Default: max
+Default: `max`
 
 ##### sources
 
-Type: `array`
+Type: `array` - *(array of sources to fetch prices from)*
 
-Default: [SUSHISWAP_V1, UNISWAP_V2, UNISWAP_V3]
-
-Array of sources to fetch prices from
-
-#### getEthPrices(blockNumber?, sources?)
-
-#### blockNumber
-
-Type: `number`
-
-The block number
-
-##### sources
-
-Type: `array`
-
-Default: [SUSHISWAP_V1, UNISWAP_V2, UNISWAP_V3]
-
-Array of sources to fetch prices from
+Default: `[SUSHISWAP_V1, UNISWAP_V2, UNISWAP_V3]`
 
 ### Get current or historical ERC20 token price
 
@@ -151,52 +126,31 @@ service.getTokenPrice(contractAddress, blockNumber, method, sources)
 //=> BigNumber
 
 // Array of  prices (across dexes) 
-service.getTokenPrices(contractAddress, blockNumber, method, sources)
+service.getTokenPrices(contractAddress, blockNumber, sources)
 //=> [BigNumber,BigNumber,BigNumber]
 ```
-#### getTokenPrices(contractAddress, blockNumber?, method?, sources?)
+#### getTokenPrice(contractAddress, blockNumber?, method?, sources?)
+#### getTokenPrices(contractAddress, blockNumber?, sources?)
 
 #### contractAddress
 
-Type: `string` 
-
-ERC 20 token contract Address
+Type: `string` -  *(ERC 20 token contract Address)*
 
 #### blockNumber
 
-Type: `number`
-
-The block number
+Type: `number`  - *(the block number)*
 
 #### method
 
 Type: `string`
 
-Default: max
+Default: `max`
 
 ##### sources
 
-Type: `array`
+Type: `array` - *(array of sources to fetch prices from)*
 
-Default: [SUSHISWAP_V1, UNISWAP_V2, UNISWAP_V3]
-
-Array of sources to fetch prices from
-
-#### getTokenPrices(blockNumber?, sources?)
-
-#### blockNumber
-
-Type: `number`
-
-The block number
-
-##### sources
-
-Type: `array`
-
-Default: [SUSHISWAP_V1, UNISWAP_V2, UNISWAP_V3]
-
-Array of sources to fetch prices from
+Default: `[SUSHISWAP_V1, UNISWAP_V2, UNISWAP_V3]`
 
 ### Get ERC20 token pools
 
@@ -213,9 +167,7 @@ service.getTokenPools(contractAddress)
 
 #### contractAddress
 
-Type: `string`
-
-ERC 20 contract address
+Type: `string` - *(ERC 20 contract address)* 
 
 [build-img]:https://github.com/fractional-company/subgrapher/actions/workflows/release.yml/badge.svg
 
