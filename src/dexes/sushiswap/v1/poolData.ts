@@ -3,37 +3,41 @@ import { mapToken, TokenFields } from './tokenData';
 import { PoolData, PoolDayData } from '../../types';
 import { SUSHISWAP_V1, TOKEN_0 } from '../../constants';
 import {
-  pairDayDatasQuery, pairsPastQuery, pairsQuery, poolsByToken0Query, poolsByToken1Query,
+  pairDayDatasQuery,
+  pairsPastQuery,
+  pairsQuery,
+  poolsByToken0Query,
+  poolsByToken1Query,
 } from './queries';
-import BigNumber from './../../../utils/BigNumber';
+import BigNumber from '../../../utils/bignumber';
 
 type PoolFields = {
-  id: string
-  reserveUSD: string
-  reserveETH: string
-  volumeUSD: string
-  untrackedVolumeUSD: string
-  trackedReserveETH: string
-  token0: TokenFields
-  token1: TokenFields
-  reserve0: string
-  reserve1: string
-  token0Price: string
-  token1Price: string
-  totalSupply: string
-  txCount: string
-  timestamp: string
-}
+  id: string;
+  reserveUSD: string;
+  reserveETH: string;
+  volumeUSD: string;
+  untrackedVolumeUSD: string;
+  trackedReserveETH: string;
+  token0: TokenFields;
+  token1: TokenFields;
+  reserve0: string;
+  reserve1: string;
+  token0Price: string;
+  token1Price: string;
+  totalSupply: string;
+  txCount: string;
+  timestamp: string;
+};
 
 type PoolDayFields = {
-  pair: any
-  date: string
-  reserveUSD: string
-  txCount: string
-  volumeUSD: string
-}
+  pair: any;
+  date: string;
+  reserveUSD: string;
+  txCount: string;
+  volumeUSD: string;
+};
 
-const mapPool = function(pool: PoolFields): PoolData {
+const mapPool = function (pool: PoolFields): PoolData {
   return {
     source: SUSHISWAP_V1,
     address: pool.id,
@@ -53,7 +57,7 @@ const mapPool = function(pool: PoolFields): PoolData {
   };
 };
 
-const mapPoolDayData = function(poolDayData: PoolDayFields): PoolDayData {
+const mapPoolDayData = function (poolDayData: PoolDayFields): PoolDayData {
   return {
     source: SUSHISWAP_V1,
     address: poolDayData?.pair?.id,
@@ -71,12 +75,15 @@ const mapPoolDayData = function(poolDayData: PoolDayFields): PoolDayData {
  * @param tokenSide
  * @returns {Promise<null|*>}
  */
-export const fetchTokenPools = async (client: GraphQLClient,
-                                      tokenAddress: string,
-                                      tokenSide: string | undefined = TOKEN_0): Promise<PoolData[] | []> => {
-
-  const { pairs } = await client.request(tokenSide === TOKEN_0 ? poolsByToken0Query : poolsByToken1Query,
-    { tokenAddress });
+export const fetchTokenPools = async (
+  client: GraphQLClient,
+  tokenAddress: string,
+  tokenSide: string | undefined = TOKEN_0
+): Promise<PoolData[] | []> => {
+  const { pairs } = await client.request(
+    tokenSide === TOKEN_0 ? poolsByToken0Query : poolsByToken1Query,
+    { tokenAddress }
+  );
 
   return (pairs || [])
     .filter((x: PoolFields | null) => x)
@@ -91,11 +98,12 @@ export const fetchTokenPools = async (client: GraphQLClient,
  * @param orderDirection
  * @returns {Promise<void>}
  */
-export const fetchPoolsData = async (client: GraphQLClient,
-                                     poolsArr: any = [],
-                                     orderBy: string | undefined = 'txCount',
-                                     orderDirection: string | undefined = 'desc'): Promise<PoolData[] | []> => {
-
+export const fetchPoolsData = async (
+  client: GraphQLClient,
+  poolsArr: any = [],
+  orderBy: string | undefined = 'txCount',
+  orderDirection: string | undefined = 'desc'
+): Promise<PoolData[] | []> => {
   const { pairs } = await client.request(pairsQuery, {
     pairs: poolsArr,
     orderBy,
@@ -114,12 +122,13 @@ export const fetchPoolsData = async (client: GraphQLClient,
  * @param orderDirection
  * @returns {Promise<*[]|PoolData[]>}
  */
-export const fetchPoolsPastData = async (client: GraphQLClient,
-                                         poolsArr: string[] = [],
-                                         blockNumber: number | undefined,
-                                         orderBy: string | undefined = 'txCount',
-                                         orderDirection: string | undefined = 'desc'): Promise<PoolData[]> => {
-
+export const fetchPoolsPastData = async (
+  client: GraphQLClient,
+  poolsArr: string[] = [],
+  blockNumber: number | undefined,
+  orderBy: string | undefined = 'txCount',
+  orderDirection: string | undefined = 'desc'
+): Promise<PoolData[]> => {
   const { pairs } = await client.request(pairsPastQuery, {
     pairs: poolsArr,
     block: {
@@ -140,16 +149,18 @@ export const fetchPoolsPastData = async (client: GraphQLClient,
  * @param skip
  * @returns {Promise<null|*>}
  */
-export const fetchPoolsDayData = async (client: GraphQLClient,
-                                        poolsArr: string[] = [],
-                                        startTime: number,
+export const fetchPoolsDayData = async (
+  client: GraphQLClient,
+  poolsArr: string[] = [],
+  startTime: number
 ): Promise<PoolDayData[]> => {
-
   const { pairDayDatas } = await client.request(pairDayDatasQuery, {
     pairs: poolsArr,
     date: startTime,
   });
 
   // @ts-ignore
-  return pairDayDatas.map((poolDayData: PoolFields) => mapPoolDayData(poolDayData));
+  return pairDayDatas.map((poolDayData: PoolFields) =>
+    mapPoolDayData(poolDayData)
+  );
 };

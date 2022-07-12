@@ -3,39 +3,43 @@ import { mapToken, TokenFields } from './tokenData';
 import { PoolData, PoolDayData } from '../../types';
 import { TOKEN_0, UNISWAP_V2 } from '../../constants';
 import {
-  pairDayDatasQuery, pairsPastQuery, pairsQuery, poolsByToken0Query, poolsByToken1Query,
+  pairDayDatasQuery,
+  pairsPastQuery,
+  pairsQuery,
+  poolsByToken0Query,
+  poolsByToken1Query,
 } from './queries';
-import BigNumber from '../../../utils/BigNumber';
+import BigNumber from '../../../utils/bignumber';
 
 type PoolFields = {
-  id: string
-  reserveUSD: string
-  reserveETH: string
-  volumeUSD: string
-  untrackedVolumeUSD: string
-  trackedReserveETH: string
-  token0: TokenFields
-  token1: TokenFields
-  reserve0: string
-  reserve1: string
-  token0Price: string
-  token1Price: string
-  totalSupply: string
-  txCount: string
-  timestamp: string
-}
+  id: string;
+  reserveUSD: string;
+  reserveETH: string;
+  volumeUSD: string;
+  untrackedVolumeUSD: string;
+  trackedReserveETH: string;
+  token0: TokenFields;
+  token1: TokenFields;
+  reserve0: string;
+  reserve1: string;
+  token0Price: string;
+  token1Price: string;
+  totalSupply: string;
+  txCount: string;
+  timestamp: string;
+};
 
 type PoolDayFields = {
-  date: string
-  pairAddress: string
-  reserve1: string
-  reserve0: string
-  tvlUSD: string
-  dailyTxns: string
-  dailyVolumeUSD: string
-}
+  date: string;
+  pairAddress: string;
+  reserve1: string;
+  reserve0: string;
+  tvlUSD: string;
+  dailyTxns: string;
+  dailyVolumeUSD: string;
+};
 
-const mapPool = function(pool: PoolFields): PoolData {
+const mapPool = function (pool: PoolFields): PoolData {
   return {
     source: UNISWAP_V2,
     address: pool.id,
@@ -55,12 +59,14 @@ const mapPool = function(pool: PoolFields): PoolData {
   };
 };
 
-const mapPoolDayData = function(poolDayData: PoolDayFields): PoolDayData {
+const mapPoolDayData = function (poolDayData: PoolDayFields): PoolDayData {
   return {
     source: UNISWAP_V2,
     address: poolDayData.pairAddress,
     date: parseInt(poolDayData.date),
-    tvlUSD: new BigNumber(poolDayData.reserve1?.toString()).plus(poolDayData.reserve0.toString()),
+    tvlUSD: new BigNumber(poolDayData.reserve1?.toString()).plus(
+      poolDayData.reserve0.toString()
+    ),
     txCount: new BigNumber(poolDayData.dailyTxns?.toString()),
     volumeUSD: new BigNumber(poolDayData.dailyVolumeUSD?.toString()),
   };
@@ -73,12 +79,15 @@ const mapPoolDayData = function(poolDayData: PoolDayFields): PoolDayData {
  * @param tokenSide
  * @returns {Promise<null|*>}
  */
-export const fetchTokenPools = async (client: GraphQLClient,
-                                      tokenAddress: string,
-                                      tokenSide: string | undefined = TOKEN_0): Promise<PoolData[] | []> => {
-
-  const { pairs } = await client.request(tokenSide === TOKEN_0 ? poolsByToken0Query : poolsByToken1Query,
-    { tokenAddress });
+export const fetchTokenPools = async (
+  client: GraphQLClient,
+  tokenAddress: string,
+  tokenSide: string | undefined = TOKEN_0
+): Promise<PoolData[] | []> => {
+  const { pairs } = await client.request(
+    tokenSide === TOKEN_0 ? poolsByToken0Query : poolsByToken1Query,
+    { tokenAddress }
+  );
 
   return (pairs || [])
     .filter((x: PoolFields | null) => x)
@@ -93,11 +102,12 @@ export const fetchTokenPools = async (client: GraphQLClient,
  * @param orderDirection
  * @returns {Promise<void>}
  */
-export const fetchPoolsData = async (client: GraphQLClient,
-                                     poolsArr: any = [],
-                                     orderBy: string | undefined = 'txCount',
-                                     orderDirection: string | undefined = 'desc'): Promise<PoolData[] | []> => {
-
+export const fetchPoolsData = async (
+  client: GraphQLClient,
+  poolsArr: any = [],
+  orderBy: string | undefined = 'txCount',
+  orderDirection: string | undefined = 'desc'
+): Promise<PoolData[] | []> => {
   const { pairs } = await client.request(pairsQuery, {
     pairs: poolsArr,
     orderBy,
@@ -116,12 +126,13 @@ export const fetchPoolsData = async (client: GraphQLClient,
  * @param orderDirection
  * @returns {Promise<*[]|PoolData[]>}
  */
-export const fetchPoolsPastData = async (client: GraphQLClient,
-                                         poolsArr: string[] = [],
-                                         blockNumber: number | undefined,
-                                         orderBy: string | undefined = 'txCount',
-                                         orderDirection: string | undefined = 'desc'): Promise<PoolData[]> => {
-
+export const fetchPoolsPastData = async (
+  client: GraphQLClient,
+  poolsArr: string[] = [],
+  blockNumber: number | undefined,
+  orderBy: string | undefined = 'txCount',
+  orderDirection: string | undefined = 'desc'
+): Promise<PoolData[]> => {
   const { pairs } = await client.request(pairsPastQuery, {
     pairs: poolsArr,
     block: {
@@ -141,17 +152,18 @@ export const fetchPoolsPastData = async (client: GraphQLClient,
  * @param startTime
  * @returns {Promise<null|*>}
  */
-export const fetchPoolsDayData = async (client: GraphQLClient,
-                                        poolsArr: string[],
-                                        startTime: number,
+export const fetchPoolsDayData = async (
+  client: GraphQLClient,
+  poolsArr: string[],
+  startTime: number
 ): Promise<PoolDayData[]> => {
-
-  const { pairDayDatas } = await client.request(pairDayDatasQuery,
-    {
-      pairs: poolsArr,
-      date: startTime,
-    });
+  const { pairDayDatas } = await client.request(pairDayDatasQuery, {
+    pairs: poolsArr,
+    date: startTime,
+  });
 
   // @ts-ignore
-  return pairDayDatas.map((poolDayData: PoolFields) => mapPoolDayData(poolDayData));
+  return pairDayDatas.map((poolDayData: PoolFields) =>
+    mapPoolDayData(poolDayData)
+  );
 };

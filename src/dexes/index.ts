@@ -1,6 +1,6 @@
 import { CHAINS } from '../constants/chains';
 import { DEX_SERVICES, DEXES } from './constants';
-import BigNumber from '../utils/BigNumber';
+import BigNumber from '../utils/bignumber';
 import { PoolData } from './types';
 
 export const METHOD_MIN = 'min';
@@ -19,13 +19,17 @@ export class Dexes {
    * @param contractAddress
    * @param sources
    */
-  async getTokenPools(contractAddress: string, sources: string[] = DEXES): Promise<PoolData[] | []> {
-
+  async getTokenPools(
+    contractAddress: string,
+    sources: string[] = DEXES
+  ): Promise<PoolData[] | []> {
     const services = this._getServices(sources);
-    const poolData = await Promise.all(services.map(service => (new service(this.chainId)).getTokenPools(contractAddress)));
-    return poolData
-      .flatMap(x => x)
-      .filter(x => x);
+    const poolData = await Promise.all(
+      services.map(service =>
+        new service(this.chainId).getTokenPools(contractAddress)
+      )
+    );
+    return poolData.flatMap(x => x).filter(x => x);
   }
 
   /**
@@ -35,13 +39,19 @@ export class Dexes {
    * @param method
    * @param sources
    */
-  async getTokenPrice(contractAddress: string, blockNumber: number | null = null, method: string = METHOD_MAX, sources: string[] = DEXES): Promise<BigNumber | null> {
-    if (!([METHOD_MIN, METHOD_MAX].includes(method))) {
+  async getTokenPrice(
+    contractAddress: string,
+    blockNumber: number | null = null,
+    method: string = METHOD_MAX,
+    sources: string[] = DEXES
+  ): Promise<BigNumber | null> {
+    if (![METHOD_MIN, METHOD_MAX].includes(method)) {
       throw new Error('Method does not exists!');
     }
 
-    const quotes = (await this.getTokenPrices(contractAddress, blockNumber, sources))
-      .filter(quote => quote?.isGreaterThan(0));
+    const quotes = (
+      await this.getTokenPrices(contractAddress, blockNumber, sources)
+    ).filter(quote => quote?.isGreaterThan(0));
 
     if (quotes.length === 0) {
       return null;
@@ -64,13 +74,19 @@ export class Dexes {
    * @param blockNumber
    * @param sources
    */
-  async getTokenPrices(contractAddress: string, blockNumber: number | null = null, sources: string[] = DEXES) {
+  async getTokenPrices(
+    contractAddress: string,
+    blockNumber: number | null = null,
+    sources: string[] = DEXES
+  ) {
     // @ts-ignore
     const services = this._getServices(sources);
-    const tokenData = await Promise.all(services.map(service => (new service(this.chainId)).getTokenData(contractAddress, blockNumber)));
-    return tokenData
-      .filter(x => x)
-      .map(i => i.derivedETH);
+    const tokenData = await Promise.all(
+      services.map(service =>
+        new service(this.chainId).getTokenData(contractAddress, blockNumber)
+      )
+    );
+    return tokenData.filter(x => x).map(i => i.derivedETH);
   }
 
   /**
@@ -79,16 +95,21 @@ export class Dexes {
    * @param method
    * @param sources
    */
-  async getEthPrice(blockNumber: number | null = null, method: string = METHOD_MAX, sources: string[] = DEXES): Promise<BigNumber | null> {
-    if (!([METHOD_MIN, METHOD_MAX].includes(method))) {
+  async getEthPrice(
+    blockNumber: number | null = null,
+    method: string = METHOD_MAX,
+    sources: string[] = DEXES
+  ): Promise<BigNumber | null> {
+    if (![METHOD_MIN, METHOD_MAX].includes(method)) {
       throw new Error('Method does not exists!');
     }
 
     /**
      * ETH will always be grater than 0
      */
-    const quotes = (await this.getEthPrices(blockNumber, sources))
-      .filter(quote => quote?.isGreaterThan(0));
+    const quotes = (await this.getEthPrices(blockNumber, sources)).filter(
+      quote => quote?.isGreaterThan(0)
+    );
 
     if (quotes.length === 0) {
       return null;
@@ -110,10 +131,17 @@ export class Dexes {
    * @param blockNumber
    * @param sources
    */
-  getEthPrices(blockNumber: null | number = null, sources: string[] = DEXES): Promise<BigNumber[]> {
+  getEthPrices(
+    blockNumber: null | number = null,
+    sources: string[] = DEXES
+  ): Promise<BigNumber[]> {
     // @ts-ignore
     const services = this._getServices(sources);
-    return Promise.all(services.map(service => (new service(this.chainId)).getEthPrice(blockNumber)));
+    return Promise.all(
+      services.map(service =>
+        new service(this.chainId).getEthPrice(blockNumber)
+      )
+    );
   }
 
   /**
@@ -122,7 +150,8 @@ export class Dexes {
    */
   _getServices(sources: string[] = DEXES) {
     // @ts-ignore
-    return sources.map((dex: string) => DEX_SERVICES[dex])
+    return sources
+      .map((dex: string) => DEX_SERVICES[dex])
       .filter(x => x)
       .filter(x => x.isChainSupported(this.chainId));
   }
