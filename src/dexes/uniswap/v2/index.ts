@@ -11,7 +11,7 @@ import {
 } from './poolData';
 import { TOKEN_1 } from '../../constants';
 import BaseDexService from '../../../client/BaseDexService';
-import BigNumber from '../../../utils/bignumber';
+import BigNumber from '../../../utils/FractionalBigNumber';
 
 export class UniswapV2 extends BaseDexService {
   constructor(chainId: number | undefined = CHAINS.MAINNET) {

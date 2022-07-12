@@ -10,7 +10,7 @@ import {
   fetchTokenPools,
 } from './poolData';
 import { TOKEN_1 } from '../../constants';
-import BigNumber from '../../../utils/bignumber';
+import BigNumber from '../../../utils/FractionalBigNumber';
 import { getEthPrice, getPastEthPrice } from './eth';
 
 export class SushiswapV1 extends BaseDexService {

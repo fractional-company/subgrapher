@@ -1,5 +1,5 @@
 import { GraphQLClient } from 'graphql-request';
-import BigNumber from '../../../utils/bignumber';
+import BigNumber from '../../../utils/FractionalBigNumber';
 import { ethPriceQuery, ethPriceTimeTravelQuery } from './queries';
 
 export const getEthPrice = async (

@@ -10,7 +10,7 @@ import { PoolData, PoolDayData, TokenData } from '../../types';
 import { fetchTokenData } from './tokenData';
 import { TOKEN_1 } from '../../constants';
 import { getEthPrice, getPastEthPrice } from './eth';
-import BigNumber from '../../../utils/bignumber';
+import BigNumber from '../../../utils/FractionalBigNumber';
 import BaseDexService from '../../../client/BaseDexService';
 
 export class UniswapV3 extends BaseDexService {

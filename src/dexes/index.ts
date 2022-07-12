@@ -1,6 +1,6 @@
 import { CHAINS } from '../constants/chains';
 import { DEX_SERVICES, DEXES } from './constants';
-import BigNumber from '../utils/bignumber';
+import BigNumber from '../utils/FractionalBigNumber';
 import { PoolData } from './types';
 
 export const METHOD_MIN = 'min';
@@ -149,10 +149,12 @@ export class Dexes {
    * @param sources
    */
   _getServices(sources: string[] = DEXES) {
-    // @ts-ignore
-    return sources
-      .map((dex: string) => DEX_SERVICES[dex])
-      .filter(x => x)
-      .filter(x => x.isChainSupported(this.chainId));
+    return (
+      sources
+        // @ts-ignore
+        .map((dex: string) => DEX_SERVICES[dex])
+        .filter(x => x)
+        .filter(x => x.isChainSupported(this.chainId))
+    );
   }
 }

@@ -1,5 +1,5 @@
 import { CHAINS } from '../src/constants/chains';
-import BigNumber from '../src/utils/bignumber';
+import BigNumber from '../src/utils/FractionalBigNumber';
 import { PoolDayData } from '../src/dexes/types';
 import { SushiswapV1 } from '../src/dexes/sushiswap/v1';
 import { SUSHISWAP_V1 } from '../src';

@@ -2,7 +2,7 @@ import { formatTokenName, formatTokenSymbol } from '../../../utils/tokens';
 import { tokenQuery, tokenTimeTravelQuery } from './queries';
 import { TokenData } from '../../types';
 import { GraphQLClient } from 'graphql-request';
-import BigNumber from '../../../utils/bignumber';
+import BigNumber from '../../../utils/FractionalBigNumber';
 import { UNISWAP_V2 } from '../../constants';
 
 export type TokenFields = {

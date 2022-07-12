@@ -1,6 +1,6 @@
 import { CHAINS } from '../src/constants/chains';
 import { UniswapV2 } from '../src/dexes/uniswap/v2';
-import BigNumber from '../src/utils/bignumber';
+import BigNumber from '../src/utils/FractionalBigNumber';
 import { PoolDayData } from '../src/dexes/types';
 import { UNISWAP_V2 } from '../src';
 

@@ -9,7 +9,7 @@ import {
 import { mapToken, TokenFields } from './tokenData';
 import { PoolData, PoolDayData } from '../../types';
 import { TOKEN_0, UNISWAP_V3 } from '../../constants';
-import BigNumber from '../../../utils/bignumber';
+import BigNumber from '../../../utils/FractionalBigNumber';
 
 type PoolFields = {
   id: string;
@@ -165,6 +165,7 @@ export const fetchPoolsDayData = async (
 
   // @ts-ignore
   return poolDayDatas.map((poolDayData: PoolFields) =>
+    // @ts-ignore
     mapPoolDayData(poolDayData)
   );
 };

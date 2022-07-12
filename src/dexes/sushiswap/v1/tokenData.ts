@@ -1,7 +1,7 @@
 import { GraphQLClient } from 'graphql-request';
 import { TokenData } from '../../types';
 import { tokenQuery, tokenTimeTravelQuery } from './queries';
-import BigNumber from '../../../utils/bignumber';
+import BigNumber from '../../../utils/FractionalBigNumber';
 import { formatTokenName, formatTokenSymbol } from '../../../utils/tokens';
 import { SUSHISWAP_V1 } from '../../constants';
 

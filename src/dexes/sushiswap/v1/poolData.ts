@@ -9,7 +9,7 @@ import {
   poolsByToken0Query,
   poolsByToken1Query,
 } from './queries';
-import BigNumber from '../../../utils/bignumber';
+import BigNumber from '../../../utils/FractionalBigNumber';
 
 type PoolFields = {
   id: string;
@@ -161,6 +161,7 @@ export const fetchPoolsDayData = async (
 
   // @ts-ignore
   return pairDayDatas.map((poolDayData: PoolFields) =>
+    // @ts-ignore
     mapPoolDayData(poolDayData)
   );
 };
