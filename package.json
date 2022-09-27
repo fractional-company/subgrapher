@@ -1,6 +1,6 @@
 {
   "name": "@fractional-company/subgrapher",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Simple utility for querying popular Subgraphs.",
   "main": "./lib/src/index.js",
   "files": [
@@ -85,6 +85,7 @@
   "dependencies": {
     "bignumber.js": "^9.0.2",
     "date-fns": "^2.28.0",
+    "graphql": "^16.6.0",
     "graphql-request": "^4.3.0",
     "ts-jest": "^28.0.8"
   }
