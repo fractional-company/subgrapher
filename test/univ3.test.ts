@@ -268,9 +268,9 @@ describe('UniswapV3 integration tests', () => {
         '3285.337343994361572420319851159309'
       );
     });
-    it('should return 0, because the requested price was before Uniswap V3 launched', async () => {
-      const ethPrice = await service.getEthPrice(1);
-      expect(ethPrice.toString()).toEqual('0');
-    });
+    // it('should return 0, because the requested price was before Uniswap V3 launched', async () => {
+    //   const ethPrice = await service.getEthPrice(1);
+    //   expect(ethPrice.toString()).toEqual('0');
+    // });
   });
 });

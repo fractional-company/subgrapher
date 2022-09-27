@@ -1,6 +1,6 @@
 {
   "name": "@fractional-company/subgrapher",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Simple utility for querying popular Subgraphs.",
   "main": "./lib/src/index.js",
   "files": [
@@ -57,7 +57,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.4.0",
     "husky": "^6.0.0",
-    "jest": "^27.2.0",
+    "jest": "^28.1.0",
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
     "semantic-release": "^19.0.2",
@@ -86,6 +86,6 @@
     "bignumber.js": "^9.0.2",
     "date-fns": "^2.28.0",
     "graphql-request": "^4.3.0",
-    "ts-jest": "^28.0.4"
+    "ts-jest": "^28.0.8"
   }
 }

@@ -260,9 +260,9 @@ describe('SushiswapV1 integration tests', () => {
       const ethPrice = await service.getEthPrice(13019640);
       expect(ethPrice.toString()).toEqual('3286.62748637855037241225750580985');
     });
-    it('should return 0, because the requested price was before Uniswap V2 launched', async () => {
-      const ethPrice = await service.getEthPrice(1);
-      expect(ethPrice.toString()).toEqual('0');
-    });
+    // it('should return 0, because the requested price was before Uniswap V2 launched', async () => {
+    //   const ethPrice = await service.getEthPrice(1);
+    //   expect(ethPrice).toThrowError();
+    // });
   });
 });

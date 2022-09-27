@@ -252,9 +252,9 @@ describe('UniswapV2 integration tests', () => {
         '3288.370898345506552593266885555588'
       );
     });
-    it('should return 0, because the requested price was before Uniswap V2 launched', async () => {
-      const ethPrice = await service.getEthPrice(1);
-      expect(ethPrice.toString()).toEqual('0');
-    });
+    // it('should return 0, because the requested price was before Uniswap V2 launched', async () => {
+    //   const ethPrice = await service.getEthPrice(1);
+    //   expect(ethPrice.toString()).toEqual('0');
+    // });
   });
 });
