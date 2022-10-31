@@ -5,6 +5,7 @@ import { PoolDayData } from '../src/dexes/types';
 import { UNISWAP_V3 } from '../src';
 
 const service = new UniswapV3(CHAINS.MAINNET);
+const goerliService = new UniswapV3(CHAINS.GÖRLI);
 const DOG_ADDRESS = '0xbaac2b4491727d78d2b78815144570b9f2fe8899';
 const HSM_ADDRESS = '0xe356025459d8222b068c474d50d93933f7316610';
 describe('UniswapV3 integration tests', () => {
@@ -262,15 +263,17 @@ describe('UniswapV3 integration tests', () => {
       const ethPrice = await service.getEthPrice();
       expect(ethPrice).not.toEqual(0);
     });
+
+    it('should return Goerli ETH price', async () => {
+      const ethPrice = await goerliService.getEthPrice();
+      expect(ethPrice).not.toEqual(0);
+    });
+
     it('should return past ETH price', async () => {
       const ethPrice = await service.getEthPrice(13019640);
       expect(ethPrice.toString()).toEqual(
         '3285.337343994361572420319851159309'
       );
     });
-    // it('should return 0, because the requested price was before Uniswap V3 launched', async () => {
-    //   const ethPrice = await service.getEthPrice(1);
-    //   expect(ethPrice.toString()).toEqual('0');
-    // });
   });
 });
