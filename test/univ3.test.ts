@@ -258,6 +258,16 @@ describe('UniswapV3 integration tests', () => {
     });
   });
 
+  describe('WETH price', () => {
+    it('should return past WETH price', async () => {
+      const token = await goerliService.getTokenData(
+        '0xb4fbf271143f4fbf7b91a5ded31805e42b2208d6'
+      );
+      expect(token?.name).toEqual('Wrapped Ether');
+      expect(token?.symbol).toEqual('WETH');
+    });
+  });
+
   describe('ETH price', () => {
     it('should return ETH price', async () => {
       const ethPrice = await service.getEthPrice();
